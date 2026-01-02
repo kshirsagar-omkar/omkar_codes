@@ -1,0 +1,118 @@
+nohup: ignoring input
+==========================================
+  n8n Keep-Alive Script Started
+  Press Ctrl+C to stop
+==========================================
+
+[2025-12-31 12:11:52] Heartbeat #1
+-------------------------------------------
+📦 Container Status:
+Name: n8n | Status: Up 14 minutes (healthy) | Ports: 0.0.0.0:5678->5678/tcp, [::]:5678->5678/tcp
+
+⏱️  System Uptime: up 4 hours, 38 minutes
+
+💾 Memory Usage:
+   Used: 3.1Gi / 15Gi (20.7%)
+
+💿 Disk Usage:
+   Used: 13G / 32G (42%)
+
+⏳ Next check in 300 seconds...
+===========================================
+
+[2025-12-31 12:16:52] Heartbeat #2
+-------------------------------------------
+📦 Container Status:
+Name: n8n | Status: Up 19 minutes (healthy) | Ports: 0.0.0.0:5678->5678/tcp, [::]:5678->5678/tcp
+
+⏱️  System Uptime: up 4 hours, 43 minutes
+
+💾 Memory Usage:
+   Used: 3.2Gi / 15Gi (21.3%)
+
+💿 Disk Usage:
+   Used: 13G / 32G (42%)
+
+⏳ Next check in 300 seconds...
+===========================================
+
+[2025-12-31 12:21:52] Heartbeat #3
+-------------------------------------------
+📦 Container Status:
+Name: n8n | Status: Up 24 minutes (healthy) | Ports: 0.0.0.0:5678->5678/tcp, [::]:5678->5678/tcp
+
+⏱️  System Uptime: up 4 hours, 48 minutes
+
+💾 Memory Usage:
+   Used: 3.1Gi / 15Gi (20.7%)
+
+💿 Disk Usage:
+   Used: 13G / 32G (42%)
+
+⏳ Next check in 300 seconds...
+===========================================
+
+[2025-12-31 12:26:52] Heartbeat #4
+-------------------------------------------
+📦 Container Status:
+Name: n8n | Status: Up 29 minutes (healthy) | Ports: 0.0.0.0:5678->5678/tcp, [::]:5678->5678/tcp
+
+⏱️  System Uptime: up 4 hours, 53 minutes
+
+💾 Memory Usage:
+   Used: 3.1Gi / 15Gi (20.7%)
+
+💿 Disk Usage:
+   Used: 13G / 32G (42%)
+
+⏳ Next check in 300 seconds...
+===========================================
+
+[2025-12-31 12:31:52] Heartbeat #5
+-------------------------------------------
+📦 Container Status:
+Name: n8n | Status: Up 34 minutes (healthy) | Ports: 0.0.0.0:5678->5678/tcp, [::]:5678->5678/tcp
+
+⏱️  System Uptime: up 4 hours, 58 minutes
+
+💾 Memory Usage:
+   Used: 3.1Gi / 15Gi (20.7%)
+
+💿 Disk Usage:
+   Used: 13G / 32G (42%)
+
+⏳ Next check in 300 seconds...
+===========================================
+
+[2025-12-31 12:36:52] Heartbeat #6
+-------------------------------------------
+📦 Container Status:
+Name: n8n | Status: Up 39 minutes (healthy) | Ports: 0.0.0.0:5678->5678/tcp, [::]:5678->5678/tcp
+
+⏱️  System Uptime: up 5 hours, 3 minutes
+
+💾 Memory Usage:
+   Used: 3.1Gi / 15Gi (20.7%)
+
+💿 Disk Usage:
+   Used: 13G / 32G (42%)
+
+⏳ Next check in 300 seconds...
+===========================================
+
+[2025-12-31 12:41:52] Heartbeat #7
+-------------------------------------------
+📦 Container Status:
+Name: n8n | Status: Up 44 minutes (healthy) | Ports: 0.0.0.0:5678->5678/tcp, [::]:5678->5678/tcp
+
+⏱️  System Uptime: up 5 hours, 8 minutes
+
+💾 Memory Usage:
+   Used: 3.1Gi / 15Gi (20.7%)
+
+💿 Disk Usage:
+   Used: 13G / 32G (42%)
+
+⏳ Next check in 300 seconds...
+===========================================
+

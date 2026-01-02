@@ -1,0 +1,24 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+// I2C address is usually 0x27 or 0x3F
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+#define LCD_SDA A4
+#define LCD_SCL A5
+
+void setup() {
+  Wire.begin();        // Start I2C
+  lcd.init();          // Initialize LCD
+  lcd.backlight();     // Turn on backlight
+
+  lcd.setCursor(0, 0); // Column 0, Row 0
+  lcd.print("Hello World");
+
+  lcd.setCursor(0, 1); // Column 0, Row 1
+  lcd.print("Arduino LCD");
+}
+
+void loop() {
+  // Nothing here. LCD already said hello.
+}
