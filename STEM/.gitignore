@@ -1,0 +1,133 @@
+# ==========================================
+# HooliSTEM Platform - .gitignore
+# ==========================================
+
+# ==========================================
+# ENVIRONMENT & SECRETS (CRITICAL)
+# ==========================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# ==========================================
+# MAVEN BUILD
+# ==========================================
+HELP.md
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# ==========================================
+# GRADLE BUILD
+# ==========================================
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ==========================================
+# IDE & EDITOR
+# ==========================================
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse / STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# ==========================================
+# JAVA & JVM
+# ==========================================
+*.class
+*.log
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+# ==========================================
+# LOGS
+# ==========================================
+logs/
+*.log
+*.log.*
+
+# ==========================================
+# OS GENERATED
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ==========================================
+# TEMPORARY FILES
+# ==========================================
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.orig
+
+# ==========================================
+# TEST & COVERAGE
+# ==========================================
+/coverage/
+*.lcov
+.nyc_output
+
+# ==========================================
+# DOCKER (local overrides)
+# ==========================================
+docker-compose.override.yml
