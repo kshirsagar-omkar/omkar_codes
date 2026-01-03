@@ -30,7 +30,7 @@ public class ProductRating extends BaseAuditEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, length = 128,
+    @JoinColumn(name = "user_id", nullable = false,
                 foreignKey = @ForeignKey(name = "fk_product_ratings_user"))
     private User user;
 

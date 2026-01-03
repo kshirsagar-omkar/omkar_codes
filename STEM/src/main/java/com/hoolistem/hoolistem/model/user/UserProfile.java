@@ -30,7 +30,7 @@ public class UserProfile extends BaseAuditEntity {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, unique = true, length = 128,
+    @JoinColumn(name = "user_id", nullable = false, unique = true,
                 foreignKey = @ForeignKey(name = "fk_user_profiles_user"))
     private User user;
 
