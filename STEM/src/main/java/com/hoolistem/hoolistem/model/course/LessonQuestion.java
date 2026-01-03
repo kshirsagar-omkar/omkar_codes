@@ -1,7 +1,7 @@
 package com.hoolistem.hoolistem.model.course;
 
 import com.hoolistem.hoolistem.model.base.BaseAuditEntity;
-import com.hoolistem.hoolistem.model.user.StudentDetail;
+import com.hoolistem.hoolistem.model.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Question asked by a student on a lesson.
+ * Question asked by a user on a lesson.
  * 
- * Part of the lesson Q&A feature for student-instructor interaction.
+ * Part of the lesson Q&A feature for user-instructor interaction.
  */
 @Entity
 @Table(name = "lesson_questions", 
        indexes = {
            @Index(name = "idx_lesson_questions_lesson", columnList = "lesson_id"),
-           @Index(name = "idx_lesson_questions_student", columnList = "student_id")
+           @Index(name = "idx_lesson_questions_user", columnList = "user_id")
        })
 @Getter
 @Setter
@@ -36,9 +36,9 @@ public class LessonQuestion extends BaseAuditEntity {
     private CourseLesson lesson;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id", nullable = false,
-                foreignKey = @ForeignKey(name = "fk_lesson_questions_student"))
-    private StudentDetail student;
+    @JoinColumn(name = "user_id", nullable = false,
+                foreignKey = @ForeignKey(name = "fk_lesson_questions_user"))
+    private User user;
 
     @Column(name = "title", length = 255)
     private String title;

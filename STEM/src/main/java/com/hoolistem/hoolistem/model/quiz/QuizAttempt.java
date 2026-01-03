@@ -1,7 +1,7 @@
 package com.hoolistem.hoolistem.model.quiz;
 
 import com.hoolistem.hoolistem.model.base.BaseAuditEntity;
-import com.hoolistem.hoolistem.model.user.StudentDetail;
+import com.hoolistem.hoolistem.model.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Quiz attempt representing a student's submission for a quiz.
+ * Quiz attempt representing a user's submission for a quiz.
  * 
  * Tracks score, time taken, pass/fail status, and all responses.
  */
@@ -19,7 +19,7 @@ import java.util.List;
 @Table(name = "quiz_attempts",
        indexes = {
            @Index(name = "idx_quiz_attempts_quiz", columnList = "quiz_id"),
-           @Index(name = "idx_quiz_attempts_student", columnList = "student_id")
+           @Index(name = "idx_quiz_attempts_user", columnList = "user_id")
        })
 @Getter
 @Setter
@@ -38,9 +38,9 @@ public class QuizAttempt extends BaseAuditEntity {
     private Quiz quiz;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id", nullable = false,
-                foreignKey = @ForeignKey(name = "fk_quiz_attempts_student"))
-    private StudentDetail student;
+    @JoinColumn(name = "user_id", nullable = false,
+                foreignKey = @ForeignKey(name = "fk_quiz_attempts_user"))
+    private User user;
 
     @Column(name = "score", nullable = false)
     @Builder.Default

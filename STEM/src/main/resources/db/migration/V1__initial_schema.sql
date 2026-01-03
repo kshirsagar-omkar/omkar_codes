@@ -283,7 +283,7 @@ CREATE INDEX idx_quiz_options_question ON quiz_options(question_id);
 CREATE TABLE quiz_attempts (
     id              BIGSERIAL PRIMARY KEY,
     quiz_id         BIGINT NOT NULL,
-    student_id      BIGINT NOT NULL,
+    user_id         VARCHAR(128) NOT NULL,  -- Firebase UID
     score           INTEGER NOT NULL DEFAULT 0,
     total_points    INTEGER NOT NULL,
     percentage      DECIMAL(5,2) NOT NULL,
@@ -294,11 +294,11 @@ CREATE TABLE quiz_attempts (
     created_at      TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_quiz_attempts_quiz FOREIGN KEY (quiz_id) REFERENCES quizzes(id),
-    CONSTRAINT fk_quiz_attempts_student FOREIGN KEY (student_id) REFERENCES student_details(id)
+    CONSTRAINT fk_quiz_attempts_user FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE INDEX idx_quiz_attempts_quiz ON quiz_attempts(quiz_id);
-CREATE INDEX idx_quiz_attempts_student ON quiz_attempts(student_id);
+CREATE INDEX idx_quiz_attempts_user ON quiz_attempts(user_id);
 
 CREATE TABLE quiz_attempt_responses (
     id                  BIGSERIAL PRIMARY KEY,
@@ -320,18 +320,18 @@ CREATE TABLE quiz_attempt_responses (
 CREATE TABLE lesson_questions (
     id          BIGSERIAL PRIMARY KEY,
     lesson_id   BIGINT NOT NULL,
-    student_id  BIGINT NOT NULL,
+    user_id     VARCHAR(128) NOT NULL,  -- Firebase UID
     title       VARCHAR(255),
     question    TEXT NOT NULL,
     is_resolved BOOLEAN NOT NULL DEFAULT FALSE,
     created_at  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_lesson_questions_lesson FOREIGN KEY (lesson_id) REFERENCES course_lessons(id) ON DELETE CASCADE,
-    CONSTRAINT fk_lesson_questions_student FOREIGN KEY (student_id) REFERENCES student_details(id)
+    CONSTRAINT fk_lesson_questions_user FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE INDEX idx_lesson_questions_lesson ON lesson_questions(lesson_id);
-CREATE INDEX idx_lesson_questions_student ON lesson_questions(student_id);
+CREATE INDEX idx_lesson_questions_user ON lesson_questions(user_id);
 
 CREATE TABLE lesson_answers (
     id              BIGSERIAL PRIMARY KEY,
@@ -354,23 +354,23 @@ CREATE INDEX idx_lesson_answers_question ON lesson_answers(question_id);
 CREATE TABLE course_enrollments (
     id          BIGSERIAL PRIMARY KEY,
     course_id   BIGINT NOT NULL,
-    student_id  BIGINT NOT NULL,
+    user_id     VARCHAR(128) NOT NULL,  -- Firebase UID
     enrolled_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     expires_at  TIMESTAMPTZ,
     created_at  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_enrollments_course FOREIGN KEY (course_id) REFERENCES courses(id),
-    CONSTRAINT fk_enrollments_student FOREIGN KEY (student_id) REFERENCES student_details(id),
-    CONSTRAINT uk_enrollments UNIQUE (course_id, student_id)
+    CONSTRAINT fk_enrollments_user FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT uk_enrollments UNIQUE (course_id, user_id)
 );
 
 CREATE INDEX idx_enrollments_course ON course_enrollments(course_id);
-CREATE INDEX idx_enrollments_student ON course_enrollments(student_id);
+CREATE INDEX idx_enrollments_user ON course_enrollments(user_id);
 
 CREATE TABLE lesson_progress (
     id              BIGSERIAL PRIMARY KEY,
     lesson_id       BIGINT NOT NULL,
-    student_id      BIGINT NOT NULL,
+    user_id         VARCHAR(128) NOT NULL,  -- Firebase UID
     progress_pct    INTEGER NOT NULL DEFAULT 0,
     is_completed    BOOLEAN NOT NULL DEFAULT FALSE,
     completed_at    TIMESTAMPTZ,
@@ -378,12 +378,12 @@ CREATE TABLE lesson_progress (
     created_at      TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_progress_lesson FOREIGN KEY (lesson_id) REFERENCES course_lessons(id) ON DELETE CASCADE,
-    CONSTRAINT fk_progress_student FOREIGN KEY (student_id) REFERENCES student_details(id),
-    CONSTRAINT uk_progress UNIQUE (lesson_id, student_id),
+    CONSTRAINT fk_progress_user FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT uk_progress UNIQUE (lesson_id, user_id),
     CONSTRAINT chk_progress_pct CHECK (progress_pct BETWEEN 0 AND 100)
 );
 
-CREATE INDEX idx_progress_student ON lesson_progress(student_id);
+CREATE INDEX idx_progress_user ON lesson_progress(user_id);
 
 -- ============================================
 -- CERTIFICATE TABLES
@@ -405,18 +405,18 @@ CREATE TABLE course_certificates (
 CREATE TABLE issued_certificates (
     id              BIGSERIAL PRIMARY KEY,
     certificate_id  BIGINT NOT NULL,
-    student_id      BIGINT NOT NULL,
+    user_id         VARCHAR(128) NOT NULL,  -- Firebase UID
     certificate_uid VARCHAR(50) NOT NULL,
     issued_at       TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at      TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_issued_cert_cert FOREIGN KEY (certificate_id) REFERENCES course_certificates(id),
-    CONSTRAINT fk_issued_cert_student FOREIGN KEY (student_id) REFERENCES student_details(id),
-    CONSTRAINT uk_issued_cert UNIQUE (certificate_id, student_id),
+    CONSTRAINT fk_issued_cert_user FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT uk_issued_cert UNIQUE (certificate_id, user_id),
     CONSTRAINT uk_certificate_uid UNIQUE (certificate_uid)
 );
 
-CREATE INDEX idx_issued_cert_student ON issued_certificates(student_id);
+CREATE INDEX idx_issued_cert_user ON issued_certificates(user_id);
 
 -- ============================================
 -- PRODUCT & CART TABLES
@@ -616,7 +616,6 @@ CREATE TABLE workshops (
 CREATE TABLE workshop_registrations (
     id              BIGSERIAL PRIMARY KEY,
     workshop_id     BIGINT NOT NULL,
-    user_id         VARCHAR(128),  -- Firebase UID (optional)
     name            VARCHAR(255) NOT NULL,
     email           VARCHAR(255) NOT NULL,
     phone           VARCHAR(20) NOT NULL,
@@ -626,8 +625,7 @@ CREATE TABLE workshop_registrations (
     registered_at   TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at      TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_workshop_reg_workshop FOREIGN KEY (workshop_id) REFERENCES workshops(id),
-    CONSTRAINT fk_workshop_reg_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+    CONSTRAINT fk_workshop_reg_workshop FOREIGN KEY (workshop_id) REFERENCES workshops(id)
 );
 
 CREATE INDEX idx_workshop_reg_workshop ON workshop_registrations(workshop_id);

@@ -1,26 +1,27 @@
 package com.hoolistem.hoolistem.model.course;
 
 import com.hoolistem.hoolistem.model.base.BaseAuditEntity;
-import com.hoolistem.hoolistem.model.user.StudentDetail;
+import com.hoolistem.hoolistem.model.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.OffsetDateTime;
 
 /**
- * Course enrollment representing a student's access to a course.
+ * Course enrollment representing a user's access to a course.
  * 
+ * Any user (Student, Instructor, Admin) can enroll in a course.
  * Tracks enrollment date and optional expiration for time-limited access.
  */
 @Entity
 @Table(name = "course_enrollments", 
        indexes = {
            @Index(name = "idx_enrollments_course", columnList = "course_id"),
-           @Index(name = "idx_enrollments_student", columnList = "student_id")
+           @Index(name = "idx_enrollments_user", columnList = "user_id")
        },
        uniqueConstraints = @UniqueConstraint(
            name = "uk_enrollments", 
-           columnNames = {"course_id", "student_id"}
+           columnNames = {"course_id", "user_id"}
        ))
 @Getter
 @Setter

@@ -1,7 +1,7 @@
 package com.hoolistem.hoolistem.model.certificate;
 
 import com.hoolistem.hoolistem.model.base.BaseAuditEntity;
-import com.hoolistem.hoolistem.model.user.StudentDetail;
+import com.hoolistem.hoolistem.model.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,15 +9,15 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 /**
- * Issued certificate to a student for course completion.
+ * Issued certificate to a user for course completion.
  * 
  * Contains a unique verification code for authenticity.
  */
 @Entity
 @Table(name = "issued_certificates",
-       indexes = @Index(name = "idx_issued_cert_student", columnList = "student_id"),
+       indexes = @Index(name = "idx_issued_cert_user", columnList = "user_id"),
        uniqueConstraints = {
-           @UniqueConstraint(name = "uk_issued_cert", columnNames = {"certificate_id", "student_id"}),
+           @UniqueConstraint(name = "uk_issued_cert", columnNames = {"certificate_id", "user_id"}),
            @UniqueConstraint(name = "uk_certificate_uid", columnNames = {"certificate_uid"})
        })
 @Getter
@@ -37,9 +37,9 @@ public class IssuedCertificate extends BaseAuditEntity {
     private CourseCertificate certificate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id", nullable = false,
-                foreignKey = @ForeignKey(name = "fk_issued_cert_student"))
-    private StudentDetail student;
+    @JoinColumn(name = "user_id", nullable = false,
+                foreignKey = @ForeignKey(name = "fk_issued_cert_user"))
+    private User user;
 
     @Column(name = "certificate_uid", nullable = false, unique = true, length = 50)
     private String certificateUid;

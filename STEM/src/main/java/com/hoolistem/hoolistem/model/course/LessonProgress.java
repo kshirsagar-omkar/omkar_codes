@@ -1,23 +1,23 @@
 package com.hoolistem.hoolistem.model.course;
 
 import com.hoolistem.hoolistem.model.base.BaseAuditEntity;
-import com.hoolistem.hoolistem.model.user.StudentDetail;
+import com.hoolistem.hoolistem.model.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.OffsetDateTime;
 
 /**
- * Lesson progress tracking for a student's learning journey.
+ * Lesson progress tracking for a user's learning journey.
  * 
  * Tracks completion percentage, video position, and completion status.
  */
 @Entity
 @Table(name = "lesson_progress", 
-       indexes = @Index(name = "idx_progress_student", columnList = "student_id"),
+       indexes = @Index(name = "idx_progress_user", columnList = "user_id"),
        uniqueConstraints = @UniqueConstraint(
            name = "uk_progress", 
-           columnNames = {"lesson_id", "student_id"}
+           columnNames = {"lesson_id", "user_id"}
        ))
 @Getter
 @Setter
@@ -36,9 +36,9 @@ public class LessonProgress extends BaseAuditEntity {
     private CourseLesson lesson;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id", nullable = false,
-                foreignKey = @ForeignKey(name = "fk_progress_student"))
-    private StudentDetail student;
+    @JoinColumn(name = "user_id", nullable = false,
+                foreignKey = @ForeignKey(name = "fk_progress_user"))
+    private User user;
 
     @Column(name = "progress_pct", nullable = false)
     @Builder.Default

@@ -2,7 +2,6 @@ package com.hoolistem.hoolistem.model.workshop;
 
 import com.hoolistem.hoolistem.model.base.BaseAuditEntity;
 import com.hoolistem.hoolistem.model.enums.RegistrationStatus;
-import com.hoolistem.hoolistem.model.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +10,7 @@ import java.time.OffsetDateTime;
 /**
  * Workshop registration from an individual or organization.
  * 
- * Can be linked to a user if registered while logged in.
+ * Does NOT require user login - guests can register directly.
  */
 @Entity
 @Table(name = "workshop_registrations",
@@ -34,11 +33,6 @@ public class WorkshopRegistration extends BaseAuditEntity {
     @JoinColumn(name = "workshop_id", nullable = false,
                 foreignKey = @ForeignKey(name = "fk_workshop_reg_workshop"))
     private Workshop workshop;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id",
-                foreignKey = @ForeignKey(name = "fk_workshop_reg_user"))
-    private User user;
 
     @Column(name = "name", nullable = false, length = 255)
     private String name;
